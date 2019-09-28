@@ -6,10 +6,13 @@ app.use("/api/about", function(request, response){
 });
 
 app.use("/api/task1", function(req, res){
-    res.send(`${req.query.n ? req.query.n.length : "<b>enter:</b>  localhost:3000/api/task1?n=[number]"}`);
+    res.send(`${req.query.n ? req.query.n.length : "<b>Error.</b> Enter: localhost:3000/api/task1?n=[number]"}`);
 });
 
 app.use('/api/task2', function(req, res){
+    if (!req.query.gender)
+        res.send("<b>Error.</b> Enter: localhost:3000/api/task2?gender=[Man|Woman]");
+        
     let gender = req.query.gender.toString();
     let people = [
         {name:'John S.', gender:'Man', bdate:new Date(1952,1,0,0,0,0,0), education:'Average', spec:'Technician', accounting:new Date(2002)},
