@@ -1,3 +1,6 @@
+const function_ = require("./function");
+const simplifier = require("./function_simplifier");
+const normal_form = require("./normal_form")
 const express = require("express");
 const app = express();
 
