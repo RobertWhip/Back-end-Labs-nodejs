@@ -89,9 +89,9 @@ const isControversial = (func) => {
             let comp = compare(disjuncts[i], disjuncts[j]);
             if (comp) {
                 let ok = 0;
-                for (let c = 0; c < disjuncts.length; c++) {
+                for (let c = 0; c < newDisjuncts.length; c++) {
                     // remove identicals
-                    disjuncts[c] = disjuncts[c].filter(function(elem, index, self) {
+                    newDisjuncts[c] = newDisjuncts[c].filter(function(elem, index, self) {
                         return index === self.indexOf(elem);
                     });
                     comp.func = comp.func.filter(function(elem, index, self) {
@@ -100,7 +100,7 @@ const isControversial = (func) => {
 
                     //console.log(JSON.stringify(disjuncts[c]) + "   !=    " + JSON.stringify(comp.func))
                 
-                    let temp0 = JSON.parse(JSON.stringify(disjuncts[c])).map(x => JSON.stringify(x)); 
+                    let temp0 = JSON.parse(JSON.stringify(newDisjuncts[c])).map(x => JSON.stringify(x)); 
                     let temp1 = JSON.parse(JSON.stringify(comp.func)).map(x => JSON.stringify(x));
 
                     let paramsEqual = 0;
@@ -116,7 +116,7 @@ const isControversial = (func) => {
                 if (ok == disjuncts.length)
                     newDisjuncts.push(comp.func);
                 
-
+                console.log((i+1)+":"+(j+1)+" DISJUNCT: " + JSON.stringify(disjuncts[i]) + ":::"+JSON.stringify(disjuncts[j]) + " === "+JSON.stringify(comp.func));
                 let replaces = "  (" + (i+1) + ", " + (j+1) + comp.replaces+")";
                 resultDisjuncts.push(comp.func.length == 0 ? ["∅", replaces]: 
                             (comp.func.length == 1 ? [comp.func[0], replaces]:
@@ -153,7 +153,9 @@ const compare = (func0, func1) => {
                             let isParam0Const = constRegExp.test(params0[c]);
                             let isParam1Const = constRegExp.test(params1[c]);
 
-                            if (params0[c] == params1[c]) {
+                            if (!isParam0Const && !isParam1Const) {
+
+                                replaces.push([params0[c], params1[c]]);
                                 ok++;
                             } else if (isParam0Const && !isParam1Const) {
                                 replaces.push([params1[c], params0[c]]);
