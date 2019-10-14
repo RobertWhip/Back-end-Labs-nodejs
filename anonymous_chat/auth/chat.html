@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="messages"></div>
+    <form id="sendContainer">
+        <input type="text" id="messageInput">
+        <button type="submit" id="sendMessage">SEND</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const $form = $("#sendContainer");
+        const $inp = $("#messageInput");
+        const $messages = $("#messages");
+
+        $form.submit(function (e) {
+            e.preventDefault();
+            socket.emit("send message", $inp.val());
+            $inp.val("");
+        });
+
+        socket.on("add message", function (data) {
+            $messages.append(`<div>${data.message}</div>`);
+        });
+    </script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #messages {
+            width: 80%;
+            max-width: 1200px;
+        }
+        #messages div {
+            background-color: #CCC;
+            padding: 5px;
+        }
+        #messages div:nth-child(2n) {
+            background-color: #FFF;
+        }
+        #sendContainer {
+            position: fixed;
+            padding-bottom: 30px;
+            bottom: 0;
+            background-color: white;
+            max-width: 1200px;
+            width: 80%;
+            display: flex;
+        }
+        #message-input {
+            flex-grow: 1;
+        }
+    </style>
+</body>
+</html>

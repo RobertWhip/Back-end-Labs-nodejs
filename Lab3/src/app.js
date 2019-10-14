@@ -8,4 +8,4 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api", api.router);
 
 app.listen(3000);
-//mongodb
+//mongoose

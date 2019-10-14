@@ -41,6 +41,8 @@ const retirementController = {
                     mongoClient.close();
                 });
             });
+        } else {
+            res.sendStatus(500);
         }
     },
     // by gender
@@ -63,6 +65,8 @@ const retirementController = {
                     mongoClient.close();
                 });
             });
+        } else {
+            res.sendStatus(400);
         }
     },
     // add
@@ -84,6 +88,8 @@ const retirementController = {
                     mongoClient.close();
                 });
             });
+        } else {
+            res.sendStatus(400);
         }
     },
     deleteId: (req, res) => {
@@ -106,6 +112,8 @@ const retirementController = {
                     mongoClient.close();                        
                 });
             });
+        } else {
+            res.sendStatus(400);
         }
     }
 }
