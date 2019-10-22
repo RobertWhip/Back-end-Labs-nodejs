@@ -14,9 +14,9 @@
         <button type="submit" id="sendMessage">SEND</button>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3001/socket.io/socket.io.js"></script>
     <script>
-        const socket = io();
+        const socket = io("http://localhost:3001");
         const $form = $("#sendContainer");
         const $inp = $("#messageInput");
         const $messages = $("#messages");

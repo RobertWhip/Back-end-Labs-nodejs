@@ -85,7 +85,7 @@ const userController = {
                                 request.post(
                                     `http://${process.env.HOST}:${process.env.PORT}/chat.html`,
                                     { headers: {"Authorization": "Bearer " + token} },
-                                     function (error, response, body) {
+                                    function (error, response, body) {
                                         if (!error && response.statusCode == 200) 
                                             res.send(body);
                                         else
