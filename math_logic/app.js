@@ -9,7 +9,7 @@ app.use('/api/resolution_method/:f', function(req, res) {
     let inp = req.params.f;
     // res.send(req.query.f);
     let result = "Функція f =  "+ inp + "<br><br>";
-    let strF = "!(" + inp+ ")".replace(/ /g, '');
+    let strF = ("!(" + inp+ ")").replace(/ /g, '');
 
     console.log("Entered function: "+ strF+"\n")
 
